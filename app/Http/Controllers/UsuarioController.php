@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Error;
 
 class UsuarioController extends Controller
 {
@@ -11,8 +12,15 @@ class UsuarioController extends Controller
     {
         return Usuario::all();
     }
-    public function show(int $id)
+    public function show($id)
     {
-        return Usuario::find($id);
+
+        $usuario = Usuario::find($id);
+
+        if (isset($usuario)) {
+            return $usuario;
+        } else {
+            return "Bad Request";
+        }
     }
 }
